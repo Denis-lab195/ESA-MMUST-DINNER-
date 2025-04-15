@@ -4,12 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ticket Sales Form</title>
-  <!-- Same HEAD and firebase scripts as your current code -->
-<style>
-    * {
-      box-sizing: border-box;
-    }
-  
+  <style>
+    * { box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
       background-color: #f0f8ff;
@@ -17,12 +13,10 @@
       margin: 0;
       padding: 20px;
     }
-    
     h2, h3 {
       color: #0044cc;
       text-align: center;
     }
-  
     form, #createAccountSection {
       max-width: 600px;
       margin: auto;
@@ -31,23 +25,19 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-  
     label {
       display: block;
       margin-top: 10px;
       font-weight: bold;
     }
-  
     input, select {
       width: 100%;
-      max-width: 100%;
       padding: 10px;
       margin-top: 5px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 1em;
     }
-  
     button {
       background-color: #28a745;
       color: white;
@@ -59,64 +49,46 @@
       width: 100%;
       font-size: 1em;
     }
-  
     button:hover {
       background-color: #218838;
     }
-  
     table {
       width: 100%;
       margin-top: 20px;
       border-collapse: collapse;
       overflow-x: auto;
     }
-  
     th, td {
       padding: 10px;
       border: 1px solid #ccc;
       text-align: left;
       font-size: 0.95em;
     }
-  
     th {
       background-color: #0044cc;
       color: white;
     }
-  
     tr:nth-child(even) {
       background-color: #f2f2f2;
     }
-  
     #submitButton, #logoutButton {
       margin-top: 20px;
     }
-  
     #logoutButton {
       background-color: #dc3545;
     }
-  
     #logoutButton:hover {
       background-color: #c82333;
     }
-  
     @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-  
-      form, #createAccountSection {
-        padding: 10px;
-      }
-  
-      th, td {
-        font-size: 0.85em;
-      }
+      body { padding: 10px; }
+      form, #createAccountSection { padding: 10px; }
+      th, td { font-size: 0.85em; }
     }
   </style>
-  
 </head>
 <body>
-  
+
   <h2>ESA MMUST DINNER TICKET SALES 2025</h2>
 
   <div id="createAccountSection">
@@ -134,12 +106,15 @@
       <label>Customer Contact:</label>
       <input type="text" id="customerContact" required />
 
+      <label>Ticket No:</label>
+      <input type="text" id="ticketNo" required />
+
       <label>Ticket Type:</label>
       <select id="ticketType" required>
         <option value="VIP">VIP</option>
         <option value="Singles">Regular</option>
         <option value="Couples">Couples</option>
-        <option value="Group of five">Group offive</option>
+        <option value="Group of five">Group of five</option>
         <option value="SEBE staff">SEBE staff</option>
         <option value="Professionals">Professionals</option>
       </select>
@@ -163,6 +138,7 @@
         <thead>
           <tr>
             <th>Customer Name</th>
+            <th>Ticket No</th>
             <th>Ticket Type</th>
             <th>Amount Paid</th>
             <th>Payment Method</th>
@@ -201,6 +177,7 @@
         salespersonId = salespersonName;
         document.getElementById("createAccountSection").style.display = "none";
         document.getElementById("salesEntrySection").style.display = "block";
+        displaySales();
       } else {
         alert("Please enter your name in capital letters.");
       }
@@ -214,16 +191,18 @@
 
       const customerName = document.getElementById("customerName").value;
       const customerContact = document.getElementById("customerContact").value;
+      const ticketNo = document.getElementById("ticketNo").value;
       const ticketType = document.getElementById("ticketType").value;
       const amountPaid = document.getElementById("amountPaid").value;
       const paymentMethod = document.getElementById("paymentMethod").value;
 
       const saleData = {
-        customerName: customerName,
-        customerContact: customerContact,
-        ticketType: ticketType,
-        amountPaid: amountPaid,
-        paymentMethod: paymentMethod,
+        customerName,
+        customerContact,
+        ticketNo,
+        ticketType,
+        amountPaid,
+        paymentMethod
       };
 
       const salesRef = ref(database, "sales/" + salespersonId);
@@ -251,6 +230,7 @@
 
             row.innerHTML = `
               <td>${sale.customerName}</td>
+              <td>${sale.ticketNo || '-'}</td>
               <td>${sale.ticketType}</td>
               <td>${sale.amountPaid}</td>
               <td>${sale.paymentMethod}</td>
