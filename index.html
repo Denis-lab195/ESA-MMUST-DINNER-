@@ -3,168 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ESA MMUST Dinner Ticket Verification</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <title>ESA MMUST DINNER TICKET SALES 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #00203FFF, #ADEFD1FF);
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #f0f4ff, #eaf4ff);
       margin: 0;
-      padding: 30px;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-    h2 {
-      color: #00203F;
-      margin-bottom: 20px;
-    }
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-    button {
-      background-color: #00203F;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #003366;
-    }
-    .smartcard {
-      margin-top: 25px;
-      background: linear-gradient(145deg, #fff, #f0f0f0);
-      border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .smartcard-columns {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .left-column, .right-column {
-      flex: 1;
-    }
-    @media screen and (min-width: 768px) {
-      .smartcard-columns {
-        flex-direction: row;
-      }
-    }
-    .smartcard-content {
-      text-align: left;
-    }
-    .smartcard h3 {
-      color: #00203F;
-      margin-top: 0;
-    }
-    .status {
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .approved {
-      color: green;
-    }
-    .pending {
-      color: red;
-    }
-    #qrCode {
-      margin-top: 10px;
-    }
-    .alert {
-      display: none;
-      color: white;
-      background-color: red;
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      animation: shake 0.3s ease-in-out 2;
-    }
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-    }
-    .footer {
-      margin-top: 20px;
-      font-size: 14px;
       color: #333;
     }
-    .congrats-message {
-      padding: 15px;
-      background-color: #e0ffe0;
-      color: #003300;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-    /* Glitter effect */
-    .karibu-glitter {
-      font-size: 22px;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(45deg, #ffda00, #f700ff, #00f7ff, #ff7300);
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glitterGlow 2s infinite;
+
+    h2, h3 {
       text-align: center;
-      margin-bottom: 10px;
+      color: #0044cc;
     }
-    @keyframes glitterGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    .card {
+      background-color: #fff;
+      max-width: 650px;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccd6f6;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+    }
+
+    button {
+      background-color: #1a73e8;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #155ab6;
+    }
+
+    #logoutButton {
+      background-color: #dc3545;
+    }
+
+    #logoutButton:hover {
+      background-color: #c82333;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #e1e5f2;
+      text-align: left;
+      font-size: 0.95em;
+    }
+
+    th {
+      background-color: #1a73e8;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9fbff;
+    }
+
+    td button {
+      background-color: #dc3545;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9em;
+    }
+
+    td button:hover {
+      background-color: #b21f2d;
+    }
+
+    #countdown {
+      text-align: center;
+      font-size: 1.1em;
+      color: #dc3545;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    #loggedInUser {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1em;
+      color: #333;
+      margin-top: -10px;
+    }
+
+    @media (max-width: 650px) {
+      .card {
+        padding: 15px;
+        margin: 10px;
+      }
+
+      th, td {
+        font-size: 0.85em;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>🎓 ESA MMUST Dinner Verification</h2>
-    <input type="text" id="serialInput" placeholder="Enter Ticket Serial Number" />
-    <button onclick="verifyTicket()">Verify Ticket</button>
-    
-    <div id="ticketTypeSelector" style="display: none; margin: 20px 0;">
-      <label for="ticketTypeDropdown"><strong>Select Ticket Type:</strong></label>
-      <select id="ticketTypeDropdown"></select>
-      <button onclick="displaySelectedTicket()">Confirm</button>
-    </div>
-    
-    <div id="smartcard" class="smartcard" style="display: none;">
-      <div class="smartcard-columns">
-        <div class="left-column smartcard-content" id="cardDetails"></div>
-        <div class="right-column" id="congratsBox"></div>
-      </div>
-    </div>
-    
-    <div class="alert" id="alertBox">❗ Ticket NOT APPROVED. Contact the organizing committee via call or WhatsApp: <br><strong>0719 736 872</strong></div>
-    
-    <div class="footer">
-      Having issues? Contact the ESA Dinner Organizing Committee: <br>
-      📞 Call / WhatsApp: <a href="https://wa.me/254719736872" target="_blank">0719 736 872</a>
-    </div>
+
+  <h2>🎉 ESA MMUST DINNER TICKET SALES 2025 🎟️</h2>
+  <div id="countdown"></div>
+
+  <div class="card" id="createAccountSection">
+    <label>Enter Your Name (WRITE YOUR FULL NAMES IN uppercase):</label>
+    <input type="text" id="salespersonName" required />
+    <button id="createAccountBtn">Login</button>
   </div>
-  
-  <!-- Firebase -->
+
+  <div class="card" id="salesEntrySection" style="display: none;">
+    <p id="loggedInUser"></p>
+    <h3>🎫 Ticket Sale Entry</h3>
+    <form id="ticketForm">
+      <label>Customer Name:</label>
+      <input type="text" id="customerName" required />
+
+      <label>Customer Contact:</label>
+      <input type="text" id="customerContact" required />
+
+      <label>Ticket No:</label>
+      <input type="text" id="ticketNo" required />
+
+      <label>Ticket Type:</label>
+      <select id="ticketType" required>
+        <option value="VIP">VIP</option>
+        <option value="Singles">Regular</option>
+        <option value="Couples">Couples</option>
+        <option value="Group of five">Group of five</option>
+        <option value="SEBE staff">SEBE staff</option>
+        <option value="Professionals">Professionals</option>
+      </select>
+
+      <label>Amount Paid:</label>
+      <input type="number" id="amountPaid" required />
+
+      <label>Payment Method:</label>
+      <select id="paymentMethod" required>
+        <option value="Cash">Cash</option>
+        <option value="MPESA">MPESA</option>
+        <option value="Bank">Bank</option>
+      </select>
+
+      <button type="submit">➕ Add Sale</button>
+    </form>
+
+    <h3>📋 Your Sales Entries</h3>
+    <table id="salesTable">
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Ticket No</th>
+          <th>Ticket Type</th>
+          <th>Amount Paid</th>
+          <th>Payment Method</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="salesEntriesList"></tbody>
+    </table>
+
+    <button id="submitButton" onclick="submitSales()" style="display: none;">✅ Submit All Sales</button>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
-  
+    import { getDatabase, ref, push, set, onValue, remove } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyAL_ZAAACf2w0f3pl6twgQaFv4heUOPnP0",
       authDomain: "esa-mmust.firebaseapp.com",
@@ -172,131 +220,133 @@
       projectId: "esa-mmust",
       storageBucket: "esa-mmust.appspot.com",
       messagingSenderId: "1032408799607",
-      appId: "1:1032408799607:web:ec6385b2f6e19d00baa972"
+      appId: "1:1032408799607:web:ec6385b2f6e19d00baa972",
+      measurementId: "G-XQ32GJJ7F7"
     };
-  
+
     const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-  
-    // Global array to store the duplicate tickets (or filtered unique ones)
-    let duplicates = [];
-  
-    window.verifyTicket = async function () {
-      const serial = document.getElementById("serialInput").value.trim();
-      const smartcard = document.getElementById("smartcard");
-      const alertBox = document.getElementById("alertBox");
-      const cardDetails = document.getElementById("cardDetails");
-      const congratsBox = document.getElementById("congratsBox");
-      const selector = document.getElementById("ticketTypeSelector");
-      const dropdown = document.getElementById("ticketTypeDropdown");
-  
-      smartcard.style.display = "none";
-      alertBox.style.display = "none";
-      cardDetails.innerHTML = "";
-      congratsBox.innerHTML = "";
-      selector.style.display = "none";
-      dropdown.innerHTML = "";
-      duplicates = [];
-  
-      if (!serial) return;
-  
-      const salesRef = ref(db, "sales");
-  
+    const database = getDatabase(app);
+    let salespersonId = "";
+
+    function createAccount() {
+      const salespersonName = document.getElementById("salespersonName").value.toUpperCase();
+      if (salespersonName.trim()) {
+        salespersonId = salespersonName;
+        document.getElementById("createAccountSection").style.display = "none";
+        document.getElementById("salesEntrySection").style.display = "block";
+        document.getElementById("loggedInUser").innerText = `👤 Logged in as: ${salespersonId}`;
+        displaySales();
+      } else {
+        alert("Please enter your name in capital letters.");
+      }
+    }
+
+    document.getElementById("createAccountBtn").addEventListener("click", createAccount);
+
+    const form = document.getElementById("ticketForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const customerName = document.getElementById("customerName").value;
+      const customerContact = document.getElementById("customerContact").value;
+      const ticketNo = document.getElementById("ticketNo").value;
+      const ticketType = document.getElementById("ticketType").value;
+      const amountPaid = document.getElementById("amountPaid").value;
+      const paymentMethod = document.getElementById("paymentMethod").value;
+
+      const saleData = {
+        customerName,
+        customerContact,
+        ticketNo,
+        ticketType,
+        amountPaid,
+        paymentMethod
+      };
+
+      const salesRef = ref(database, "sales/" + salespersonId);
+      push(salesRef, saleData).then(() => {
+        alert("Sale added successfully!");
+        form.reset();
+        displaySales();
+      }).catch((error) => {
+        alert("Error adding sale: " + error.message);
+      });
+    });
+
+    function displaySales() {
+      const salesRef = ref(database, "sales/" + salespersonId);
       onValue(salesRef, (snapshot) => {
-        const data = snapshot.val();
-        for (const seller in data) {
-          for (const ticketId in data[seller]) {
-            const ticket = data[seller][ticketId];
-            if (ticket.ticketNo === serial) {
-              duplicates.push(ticket);
-            }
+        const salesEntries = snapshot.val();
+        const salesList = document.getElementById("salesEntriesList");
+        salesList.innerHTML = "";
+        let allEntriesFilled = false;
+
+        if (salesEntries) {
+          for (let key in salesEntries) {
+            const sale = salesEntries[key];
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+              <td>${sale.customerName}</td>
+              <td>${sale.ticketNo || '-'}</td>
+              <td>${sale.ticketType}</td>
+              <td>${sale.amountPaid}</td>
+              <td>${sale.paymentMethod}</td>
+              <td><button onclick="deleteSale('${key}')">Delete</button></td>
+            `;
+            salesList.appendChild(row);
+            allEntriesFilled = true;
           }
         }
-  
-        if (duplicates.length === 0) {
-          alertBox.innerHTML = "❗ Ticket not found. Please check the serial number.";
-          alertBox.style.display = "block";
-        } else if (duplicates.length === 1) {
-          renderSmartCard(duplicates[0]);
-        } else {
-          // Filter out duplicate ticket types so that only unique ticket types are shown.
-          const uniqueTickets = [];
-          duplicates.forEach(ticket => {
-            if (!uniqueTickets.find(t => t.ticketType === ticket.ticketType)) {
-              uniqueTickets.push(ticket);
-            }
-          });
-  
-          // Update the global array reference to only include unique tickets.
-          duplicates = uniqueTickets;
-  
-          // Populate the dropdown with unique ticket types.
-          selector.style.display = "block";
-          duplicates.forEach((ticket, index) => {
-            const option = document.createElement("option");
-            option.value = index;
-            option.textContent = ticket.ticketType;
-            dropdown.appendChild(option);
-          });
-        }
-      }, { onlyOnce: true });
-    };
-  
-    window.displaySelectedTicket = function () {
-      const selectedIndex = document.getElementById("ticketTypeDropdown").value;
-      const selectedTicket = duplicates[selectedIndex];
-  
-      // Hide the selector dropdown after selection.
-      document.getElementById("ticketTypeSelector").style.display = "none";
-  
-      renderSmartCard(selectedTicket);
-    };
-  
-    function renderSmartCard(ticket) {
-      const smartcard = document.getElementById("smartcard");
-      const alertBox = document.getElementById("alertBox");
-      const cardDetails = document.getElementById("cardDetails");
-      const congratsBox = document.getElementById("congratsBox");
-  
-      const approved = ticket.approved;
-  
-      cardDetails.innerHTML = `
-        <h3>🎫 Ticket Smartcard</h3>
-        <p><strong>Name:</strong> ${ticket.customerName}</p>
-        <p><strong>Contact:</strong> ${ticket.customerContact || 'N/A'}</p>
-        <p><strong>Ticket Type:</strong> ${ticket.ticketType}</p>
-        <p><strong>Amount Paid:</strong> ${ticket.amountPaid}</p>
-        <p><strong>Payment:</strong> ${ticket.paymentMethod}</p>
-        <p class="status ${approved ? 'approved' : 'pending'}">
-          Status: ${approved ? 'APPROVED ✅' : 'NOT APPROVED ❗'}
-        </p>
-        <div id="qrCode"></div>
-      `;
-  
-      QRCode.toCanvas(document.getElementById("qrCode"), ticket.ticketNo, {
-        width: 120,
-        color: {
-          dark: "#00203F",
-          light: "#FFFFFF"
-        }
+
+        document.getElementById("submitButton").style.display = allEntriesFilled ? "block" : "none";
       });
-  
-      if (approved) {
-        congratsBox.innerHTML = `
-          <div class="congrats-message">
-            <div class="karibu-glitter">✨ KARIBU GOLF HOTEL ✨</div>
-            🎉 Congratulations!<br>
-            You are officially invited to the <strong>ESA MMUST Dinner</strong> at <strong>Golf Hotel, Kakamega</strong> on <strong>17th April 2025</strong>.<br>
-            🕠 Entry Time: <strong>5:30 PM to 6:30 PM</strong>.<br>
-            Come dressed to impress!
-          </div>
-        `;
-      } else {
-        alertBox.style.display = "block";
-      }
-  
-      smartcard.style.display = "flex";
     }
+
+    window.deleteSale = function (saleId) {
+      const saleRef = ref(database, "sales/" + salespersonId + "/" + saleId);
+      remove(saleRef).then(() => {
+        alert("Sale deleted successfully!");
+      }).catch((error) => {
+        alert("Error deleting sale: " + error.message);
+      });
+    };
+
+    window.submitSales = function () {
+      alert("✅ All sales submitted!");
+    };
+
+    function startCountdown() {
+      const countdownEl = document.getElementById("countdown");
+      const deadline = new Date();
+      deadline.setHours(23, 20, 0, 0); // 5:30 PM today
+
+      function updateCountdown() {
+        const now = new Date();
+        const timeLeft = deadline - now;
+
+        if (timeLeft <= 0) {
+          countdownEl.innerHTML = `⏰ Deadline Passed!<br>📞 Contact Admin via <a href="https://wa.me/2547XXXXXXXXX" target="_blank">WhatsApp</a>`;
+          document.getElementById("ticketForm").style.display = "none";
+          document.getElementById("submitButton").style.display = "none";
+          document.getElementById("createAccountSection").style.display = "none";
+          document.getElementById("salesEntrySection").style.display = "none";
+          return;
+        }
+
+        const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+        const seconds = Math.floor((timeLeft / 1000) % 60);
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+
+        countdownEl.innerHTML = `🕒 Time Left: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    startCountdown();
   </script>
 </body>
 </html>
