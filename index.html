@@ -3,102 +3,161 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ticket Sales Form</title>
+  <title>ESA MMUST DINNER TICKET SALES 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f8ff;
-      color: #333;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #f0f4ff, #eaf4ff);
       margin: 0;
       padding: 20px;
+      color: #333;
     }
+
     h2, h3 {
-      color: #0044cc;
       text-align: center;
+      color: #0044cc;
     }
-    form, #createAccountSection {
-      max-width: 600px;
-      margin: auto;
-      padding: 15px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    .card {
+      background-color: #fff;
+      max-width: 650px;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+      animation: fadeIn 1s ease-in-out;
     }
+
     label {
       display: block;
-      margin-top: 10px;
-      font-weight: bold;
+      margin-top: 12px;
+      font-weight: 600;
     }
+
     input, select {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      margin-top: 6px;
+      border: 1px solid #ccd6f6;
+      border-radius: 8px;
       font-size: 1em;
+      transition: 0.3s ease;
     }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+    }
+
     button {
-      background-color: #28a745;
+      background-color: #1a73e8;
       color: white;
       padding: 10px 20px;
-      margin-top: 15px;
+      margin-top: 20px;
       border: none;
       cursor: pointer;
-      border-radius: 5px;
-      width: 100%;
+      border-radius: 8px;
       font-size: 1em;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #218838;
+      background-color: #155ab6;
     }
+
+    #logoutButton {
+      background-color: #dc3545;
+    }
+
+    #logoutButton:hover {
+      background-color: #c82333;
+    }
+
     table {
       width: 100%;
       margin-top: 20px;
       border-collapse: collapse;
-      overflow-x: auto;
+      animation: fadeIn 0.8s ease-in-out;
     }
+
     th, td {
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #e1e5f2;
       text-align: left;
       font-size: 0.95em;
     }
+
     th {
-      background-color: #0044cc;
+      background-color: #1a73e8;
       color: white;
     }
+
     tr:nth-child(even) {
-      background-color: #f2f2f2;
+      background-color: #f9fbff;
     }
-    #submitButton, #logoutButton {
-      margin-top: 20px;
-    }
-    #logoutButton {
+
+    td button {
       background-color: #dc3545;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9em;
     }
-    #logoutButton:hover {
-      background-color: #c82333;
+
+    td button:hover {
+      background-color: #b21f2d;
     }
-    @media (max-width: 600px) {
-      body { padding: 10px; }
-      form, #createAccountSection { padding: 10px; }
-      th, td { font-size: 0.85em; }
+
+    #countdown {
+      text-align: center;
+      font-size: 1.1em;
+      color: #dc3545;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    #loggedInUser {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1em;
+      color: #333;
+      margin-top: -10px;
+    }
+
+    @media (max-width: 650px) {
+      .card {
+        padding: 15px;
+        margin: 10px;
+      }
+
+      th, td {
+        font-size: 0.85em;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <h2>ESA MMUST DINNER TICKET SALES 2025</h2>
+  <h2>🎉 ESA MMUST DINNER TICKET SALES 2025 🎟️</h2>
+  <div id="countdown"></div>
 
-  <div id="createAccountSection">
+  <div class="card" id="createAccountSection">
     <label>Enter Your Name (WRITE YOUR FULL NAMES IN uppercase):</label>
     <input type="text" id="salespersonName" required />
     <button id="createAccountBtn">Login</button>
   </div>
 
-  <div id="salesEntrySection" style="display: none;">
-    <h3>Enter Ticket Sale Details</h3>
+  <div class="card" id="salesEntrySection" style="display: none;">
+    <p id="loggedInUser"></p>
+    <h3>🎫 Ticket Sale Entry</h3>
     <form id="ticketForm">
       <label>Customer Name:</label>
       <input type="text" id="customerName" required />
@@ -129,27 +188,25 @@
         <option value="Bank">Bank</option>
       </select>
 
-      <button type="submit">Add Sale</button>
+      <button type="submit">➕ Add Sale</button>
     </form>
 
-    <h3>Your Sales Entries</h3>
-    <div style="overflow-x: auto;">
-      <table id="salesTable">
-        <thead>
-          <tr>
-            <th>Customer Name</th>
-            <th>Ticket No</th>
-            <th>Ticket Type</th>
-            <th>Amount Paid</th>
-            <th>Payment Method</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="salesEntriesList"></tbody>
-      </table>
-    </div>
+    <h3>📋 Your Sales Entries</h3>
+    <table id="salesTable">
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Ticket No</th>
+          <th>Ticket Type</th>
+          <th>Amount Paid</th>
+          <th>Payment Method</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="salesEntriesList"></tbody>
+    </table>
 
-    <button id="submitButton" onclick="submitSales()" style="display: none;">Submit All Sales</button>
+    <button id="submitButton" onclick="submitSales()" style="display: none;">✅ Submit All Sales</button>
   </div>
 
   <script type="module">
@@ -161,7 +218,7 @@
       authDomain: "esa-mmust.firebaseapp.com",
       databaseURL: "https://esa-mmust-default-rtdb.firebaseio.com",
       projectId: "esa-mmust",
-      storageBucket: "esa-mmust.firebasestorage.app",
+      storageBucket: "esa-mmust.appspot.com",
       messagingSenderId: "1032408799607",
       appId: "1:1032408799607:web:ec6385b2f6e19d00baa972",
       measurementId: "G-XQ32GJJ7F7"
@@ -177,6 +234,7 @@
         salespersonId = salespersonName;
         document.getElementById("createAccountSection").style.display = "none";
         document.getElementById("salesEntrySection").style.display = "block";
+        document.getElementById("loggedInUser").innerText = `👤 Logged in as: ${salespersonId}`;
         displaySales();
       } else {
         alert("Please enter your name in capital letters.");
@@ -255,8 +313,40 @@
     };
 
     window.submitSales = function () {
-      alert("Sales submitted successfully!");
+      alert("✅ All sales submitted!");
     };
+
+    function startCountdown() {
+      const countdownEl = document.getElementById("countdown");
+      const deadline = new Date();
+      deadline.setHours(17, 30, 0, 0); // 5:30 PM today
+
+      function updateCountdown() {
+        const now = new Date();
+        const timeLeft = deadline - now;
+
+        if (timeLeft <= 0) {
+          countdownEl.innerHTML = `⏰ Deadline Passed!<br>📞 Contact Admin via <a href="https://wa.me/2547XXXXXXXXX" target="_blank">WhatsApp</a>`;
+          document.getElementById("ticketForm").style.display = "none";
+          document.getElementById("submitButton").style.display = "none";
+          document.getElementById("createAccountSection").style.display = "none";
+          document.getElementById("salesEntrySection").style.display = "none";
+          return;
+        }
+
+        const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+        const seconds = Math.floor((timeLeft / 1000) % 60);
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+
+        countdownEl.innerHTML = `🕒 Time Left: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    startCountdown();
   </script>
 </body>
 </html>
